@@ -1,15 +1,17 @@
+def args = ["-Xlint:deprecation"]
+
 group 'gabrimatic.info.restart'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.7.10'
+    ext.kotlin_version = '1.8.22'
     repositories {
         google()
         mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.3.1'
+        classpath 'com.android.tools.build:gradle:8.2.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -19,6 +21,10 @@ rootProject.allprojects {
         google()
         mavenCentral()
     }
+}
+
+project.getTasks().withType(JavaCompile).configureEach {
+    options.compilerArgs.addAll(args)
 }
 
 apply plugin: 'com.android.library'
@@ -50,5 +56,5 @@ android {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 }
